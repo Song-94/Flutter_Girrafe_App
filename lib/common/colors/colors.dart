@@ -1,0 +1,3 @@
+const GREEN_BASE = 0xff79CF9F;
+const GREEN_MAIN = 0xff3CB371;
+const GREEN_ACCENT = 0xff0C964A;
