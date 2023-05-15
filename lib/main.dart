@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_giraffe_app/common/colors/theme.dart';
 import 'package:flutter_giraffe_app/common/provider/router_provider.dart';
-import 'package:flutter_giraffe_app/user/provider/auth_provider.dart';
-import 'package:flutter_giraffe_app/user/provider/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async{
+  await dotenv.load(fileName: "env/.api_env");
   runApp(
     const ProviderScope(
       child: _App(),

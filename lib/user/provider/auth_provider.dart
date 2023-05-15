@@ -19,7 +19,12 @@ class AuthChangeNotifier extends ChangeNotifier {
   AuthChangeNotifier({
     required this.ref,
   }) {
-    ref.watch(userProvider);
+    // ref.watch(userProvider);
+    ref.listen(userProvider, (previous, next) {
+      if(previous != next) {
+        notifyListeners();
+      }
+    });
   }
 
   void logout() {
@@ -27,26 +32,25 @@ class AuthChangeNotifier extends ChangeNotifier {
   }
 
   String? redirectLogic(BuildContext context, GoRouterState state) {
-    print('execute redirectLogic');
-
-    return null;
-
-    if (state.location == '/splash') {
-      return null;
-    }
-
-    if (state.location == '/login') {
-      return null;
-    }
+    // redirect : navigation 하는 순간 함수 실행
 
     final UserModelBase? user = ref.read(userProvider);
     final logginIn = state.location == '/login';
+
+    print('execute redirectLogic ${user.runtimeType}');
 
     // 유저 정보가 없는데
     // => null
     // 로그인 중 이면 그대로 로그인 페이지에 두고
     // 만약에 로그인 중이 아니라면 로그인 페이지로 이동.
+
+    if(state.location == '/splash') {
+      print('location is splash');
+      return null;
+    }
+
     if (user == null) {
+      print('user is null');
       return logginIn ? null : '/login';
     }
 

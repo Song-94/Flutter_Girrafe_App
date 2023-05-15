@@ -35,8 +35,45 @@ create by song.
 <pre>
 <code>
   @override
-  void performPrivateCommand(String action, Map<String, dynamic> data) {
-  if (widget.onAppPrivateCommand != null) widget.onAppPrivateCommand!(action, data);
+    void performPrivateCommand(String action, Map<String, dynamic> data) {
+    if (widget.onAppPrivateCommand != null) widget.onAppPrivateCommand!(action, data);
   }
 </code>
 </pre>
+
+5. DioError (DioErrorType.other):
+   type 'String' is not a subtype of type 'Map<String, dynamic>?' in type cast
+
+- https://dokit.tistory.com/15
+
+6. JsonSerializable 주의 사항
+
+- 모델 인자는 무조건 스트링을 하던지, 아니면 JsonKey 로 변환해서 넣던지
+- baseUrl 의 끝은 항상 '/' 로 끝나야 한다.
+
+<pre>
+<code>
+@JsonSerializable()
+class JsonObject extends Object {
+  @JsonKey(fromJson: _stringToInt, toJson: _stringFromInt)
+  final int number;
+
+  JsonObject(this.number);
+
+  factory JsonObject.fromJson(Map<String, dynamic> json) => _$JsonObjectFromJson(json);
+
+  static int _stringToInt(String number) => number == null ? null : int.parse(number);
+  static String _stringFromInt(int number) => number?.toString();
+}
+</code>
+</pre>
+
+7. Different ways to print an object in Dart and Flutter
+- https://www.cloudhadoop.com/dart-print-object/
+
+8. Press Button, Remove Animate effects.
+- Colors.transparent
+- https://codewithandrea.com/tips/disable-widget-splash-effect-flutter/
+
+9. reverse-geocoding
+- https://pub.dev/packages/geocoding

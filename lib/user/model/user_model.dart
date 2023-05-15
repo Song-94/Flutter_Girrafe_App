@@ -16,10 +16,8 @@ class UserModelError extends UserModelBase {
 // 로그인 된 상태.
 class UserModel extends UserModelBase {
   final String id;
-  final String password;
 
   UserModel({
     required this.id,
-    required this.password,
   });
 }

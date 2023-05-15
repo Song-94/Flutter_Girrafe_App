@@ -20,11 +20,9 @@ class UserStateNotifier extends StateNotifier<UserModelBase?> {
 
   void login({
     required String id,
-    required String password,
   }) {
     state = UserModel(
       id: id,
-      password: password,
     );
   }
 
